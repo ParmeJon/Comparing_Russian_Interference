@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   handleIdSearch = async (id) => {
-    await this.setState({errors: "", startNum: 0, endNum: 50})
+    await this.setState({errors: "", startNum: 0, endNum: this.state.interval})
     if (id === "") {
       fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}`)
       .then(res => res.json())
@@ -48,7 +48,7 @@ class App extends React.Component {
 
   searchWithFilter = async (e) => {
     e.preventDefault()
-    await this.setState({startNum: 0, endNum: 50, morePosts: true})
+    await this.setState({startNum: 0, endNum: this.state.interval, morePosts: true})
      fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
       .then(res => res.json())
       .then(json => this.setState({ posts: json }));
@@ -67,10 +67,17 @@ class App extends React.Component {
   }
 
   loadMore = () => {
-    this.setState({startNum: this.state.endNum, endNum: this.state.endNum + this.state.interval },
+    this.setState({startNum: this.state.endNum, endNum: parseInt(this.state.endNum) + parseInt(this.state.interval) },
       this.loadUser 
       )
 
+  }
+
+  handleInterval = async (e) => {
+    await this.setState({ interval: e.target.value, endNum: e.target.value, startNum: 0})
+    fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
+      .then(res => res.json())
+      .then(json => this.setState({ posts: json }));
   }
 
   render() {
@@ -108,6 +115,14 @@ class App extends React.Component {
 
             <button>Search</button>
           </form>
+        </div>
+
+        <div>
+          <select value={this.state.interval} name="interval" onChange={this.handleInterval}>
+            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
         </div>
 
         { this.state.errors !== "" ? this.state.errors : posts }
