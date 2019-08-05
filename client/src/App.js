@@ -1,6 +1,7 @@
 import React from 'react';
 import Post from './components/Post'
 import SearchIdForm from './components/SearchIdForm'
+import ScrollButton from './components/ScrollButton'
 import './App.css';
 
 class App extends React.Component {
@@ -91,33 +92,38 @@ class App extends React.Component {
 
         <div>
           <form onSubmit={this.searchWithFilter}>
-
-            <select value={this.state.property} name="property" onChange={this.handleChange} placeholder="Filter by property">
-              <option value="text">Text Content</option>
-              <option value="url">URL</option>
-              <option value="pdf">PDF</option>
-              <option value="image">Image Number</option>
-              <option value="created">Created At</option>
-              <option value="ended">Ended On</option>
-            </select>
+            <div className="select">
+              <select value={this.state.property} name="property" onChange={this.handleChange} placeholder="Filter by property">
+                <option value="text">Text Content</option>
+                <option value="url">URL</option>
+                <option value="pdf">PDF</option>
+                <option value="image">Image Number</option>
+                <option value="created">Created At</option>
+                <option value="ended">Ended On</option>
+              </select>
+            </div>
 
             <input type="text" name="propertyFilter" placeholder="Search for..." onChange={this.handleChange}></input>
+           
+            <div className="select">
+              <select value={this.state.order} name="order" onChange={this.handleChange}>
+                <option value="clicks">Clicks</option>
+                <option value="impressions">Impressions</option>
+              </select>
+            </div>
 
-            <select value={this.state.order} name="order" onChange={this.handleChange}>
-              <option value="clicks">Clicks</option>
-              <option value="impressions">Impressions</option>
-            </select>
-
-            <select value={this.state.orderBy} name="orderBy" onChange={this.handleChange}>
-              <option value="desc">Desc</option>
-              <option value="asc">Asc</option>
-            </select>
+            <div className="select">
+              <select value={this.state.orderBy} name="orderBy" onChange={this.handleChange}>
+                <option value="desc">Desc</option>
+                <option value="asc">Asc</option>
+              </select>
+            </div>
 
             <button>Search</button>
           </form>
         </div>
 
-        <div>
+        <div className="select">
           <select value={this.state.interval} name="interval" onChange={this.handleInterval}>
             <option value="20">20</option>
             <option value="50">50</option>
@@ -127,6 +133,8 @@ class App extends React.Component {
 
         { this.state.errors !== "" ? this.state.errors : posts }
         { posts.length > 1 && this.state.morePosts ? <button onClick={this.loadMore}> Load More </button> : <p>No More</p>}
+      
+        <ScrollButton scrollStepInPx="100" delayInMs="5"/>
       </div>
     );
   }
