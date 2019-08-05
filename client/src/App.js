@@ -9,21 +9,21 @@ class App extends React.Component {
     posts: [],
     startNum: 0,
     endNum: 50,
+    interval: 50,
     property: "text",
     propertyFilter: "",
     order: "clicks",
     orderBy: "desc",
-    errors: ""
+    errors: "",
+    morePosts: true
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}`)
-      .then(res => res.json())
-      .then(json => this.setState({ posts: json }));
+    this.loadUser()
   }
 
-  handleIdSearch = (id) => {
-    this.setState({errors: ""})
+  handleIdSearch = async (id) => {
+    await this.setState({errors: "", startNum: 0, endNum: 50})
     if (id === "") {
       fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}`)
       .then(res => res.json())
@@ -46,11 +46,31 @@ class App extends React.Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  searchWithFilter = (e) => {
+  searchWithFilter = async (e) => {
     e.preventDefault()
+    await this.setState({startNum: 0, endNum: 50, morePosts: true})
      fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
       .then(res => res.json())
       .then(json => this.setState({ posts: json }));
+  }
+
+  loadUser = () => {
+      fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
+      .then(res => res.json())
+      .then(json => {
+        if (json.length < 1) {
+          this.setState({ morePosts: false})
+        } else {
+          this.setState({ posts: [...this.state.posts, ...json] })
+        }
+      });
+  }
+
+  loadMore = () => {
+    this.setState({startNum: this.state.endNum, endNum: this.state.endNum + this.state.interval },
+      this.loadUser 
+      )
+
   }
 
   render() {
@@ -91,6 +111,7 @@ class App extends React.Component {
         </div>
 
         { this.state.errors !== "" ? this.state.errors : posts }
+        { posts.length > 1 && this.state.morePosts ? <button onClick={this.loadMore}> Load More </button> : <p>No More</p>}
       </div>
     );
   }
