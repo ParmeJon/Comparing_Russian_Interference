@@ -1,25 +1,46 @@
 import React from 'react';
+import Post from './components/Post'
+import FilterForm from './components/FilterForm'
 import './App.css';
 
 class App extends React.Component {
 
   state = {
-    posts: []
+    posts: [],
+    startNum: 0,
+    endNum: 100
+
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/posts')
-    .then(res => res.json())
-    .then(json => this.setState({posts: json}))
+    fetch(`http://localhost:3000/posts?_start=${this.state.startNum}&_end=${this.state.endNum}`)
+      .then(res => res.json())
+      .then(json => this.setState({ posts: json }));
+  }
+
+  handleIdSearch = (id) => {
+    if (id === "") {
+      fetch(`http://localhost:3000/posts?_start=${this.state.startNum}&_end=${this.state.endNum}`)
+      .then(res => res.json())
+      .then(json => this.setState({ posts: json }));
+    } else {
+      fetch(`http://localhost:3000/posts/${id}`)
+        .then(res => res.json())
+        .then(json => {
+            this.setState({ posts: [json]})
+        })
+    }
   }
 
   render() {
 
+    const posts = this.state.posts.map(post => <Post key={post.id} info={post}/>)
 
     return (
       <div className="App">
         <h1>Russian Interference Data</h1>
-        {this.state.posts.map(post => <div> {post.id }</div>)}
+        <FilterForm handleIdSearch={this.handleIdSearch}/>
+        { posts }
       </div>
     );
   }
