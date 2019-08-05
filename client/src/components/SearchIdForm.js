@@ -1,6 +1,6 @@
 import React from "react";
 
-class FilterForm extends React.Component {
+class SearchIdForm extends React.Component {
   state = {
     searchId: ""
   };
@@ -12,6 +12,7 @@ class FilterForm extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     this.props.handleIdSearch(this.state.searchId)
+    this.setState({searchId: ""})
   }
 
   render() {
@@ -27,4 +28,4 @@ class FilterForm extends React.Component {
   }
 }
 
-export default FilterForm;
+export default SearchIdForm;
