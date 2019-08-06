@@ -87,7 +87,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>Russian Interference Data</h1>
+        <div id="title">RUSSIAN INTERFERENCE DATA</div>
         <SearchIdForm handleIdSearch={this.handleIdSearch}/>
 
         <div>
@@ -131,7 +131,16 @@ class App extends React.Component {
           </select>
         </div>
 
+        <div className="posts-container">
+          <div className="post-labels posts">
+            <div>ID</div>
+            <div>Impressions</div>
+            <div>Clicks</div>
+            <div>Text Content</div>
+            <div>Date Created</div>
+          </div>
         { this.state.errors !== "" ? this.state.errors : posts }
+        </div>
         { posts.length > 1 && this.state.morePosts ? <button onClick={this.loadMore}> Load More </button> : <p>No More</p>}
       
         <ScrollButton scrollStepInPx="100" delayInMs="5"/>

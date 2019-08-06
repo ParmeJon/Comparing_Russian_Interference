@@ -1,23 +1,87 @@
  html, body{
   height: 100%;
+
+  font-family: 'Lato', sans-serif;
 }
 
-a {
-  color: #3498db;
+/* TABLE OF CONTENTS */
+/* Title Header */
+/* Search ID Form */
+/* Posts Container */
+/* Text Field Input */
+/* Scroll Button */
+
+/* Title Header */
+
+#title {
+    margin: 20px, 10px, 0px;
+    text-align: center;
+    font-size: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #1abc9c;
+    color: white;
 }
-  
-.long {
-  width: 100%;
-  background-color: #4174a1;
+
+
+/* Search ID Form */
+
+.search-id-form {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
 }
- 
-.container {
-  height: 400px;
+
+.id-input {
+    width: 200px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 14px;
 }
-  
+
+.id-button {
+    padding: 12px 20px;
+    margin: 8px 0;
+    background-color: #1abc9c;
+    font-size: 15px;
+    border-radius: 2px;
+    color: white;
+}
+
+/* Posts Container */
+
+.posts-container {
+    width: 80vw;
+    display: grid;
+    margin: auto;
+    grid-row-gap: 10px;
+}
+
+.post-labels {
+    font-weight: bold;
+}
+
+/* Posts */
+.posts {
+    display: grid; 
+    grid-template-columns: 50px 100px 100px 1fr 100px;
+}
+
+/* Text field input */
+
+input[type=text] {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+
+/* Scroll Button */
 .scroll {
   opacity: 0.3;
-  background-color: #2980b9;
+  background-color: #1abc9c;
   width: 40px;
   height: 40px;
   position: fixed;

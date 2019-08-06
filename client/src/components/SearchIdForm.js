@@ -18,10 +18,10 @@ class SearchIdForm extends React.Component {
   render() {
 
     return (
-      <div className="App">
+      <div className="search-id-form">
         <form onSubmit={this.handleSubmit}>
-          <input placeholder="Search by id" onChange={this.handleChange} value={this.state.searchId}/>
-          <button>Search</button>
+          <input className="id-input" placeholder="Search by id" onChange={this.handleChange} value={this.state.searchId}/>
+          <button className="id-button">Search</button>
         </form>
       </div>
     );
