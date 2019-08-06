@@ -28,6 +28,11 @@
     padding-bottom: 50px;
     background-color: #1abc9c;
     color: white;
+    transition: .5s ease;
+}
+
+#title:hover {
+    color:#e74c3c;
 }
 
 
@@ -39,32 +44,76 @@
     text-align: center;
 }
 
-.id-input {
-    width: 200px;
+.theme-input {
     padding: 12px 20px;
     margin: 8px 0;
     border: 2px solid #34495e;
     box-sizing: border-box;
     font-size: 14px;
+    border-radius: 2px;
+}
+.id-input {
+    width: 200px;
 }
 
-.id-button {
+/* general buttons */
+.theme-button {
     padding: 12px 20px;
     margin: 8px 0;
     border: 2px solid #1abc9c;
     font-size: 15px;
     border-radius: 2px;
     color: #1abc9c;
-    margin-left: 5px;
     transition: .5s ease;
 }
 
-.id-button:hover {
+.id-button {
+    margin-left: 5px;
+}
+
+.theme-button:hover {
     background-color: #1abc9c;
     color: white;
 }
 
 /* FILTER FORM */
+
+.filter-form-container {
+    display: grid;
+    width: 80vw;
+    grid-template-columns: 130px 2fr 115px 65px 91.8px;
+    grid-column-gap: 5px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+.filter-item {
+    align-self: stretch;
+}
+
+.filter-input {
+    width: 100%;
+}
+
+/* general select */
+
+select {
+    height: 51px;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 15px;
+    border: 2px solid #34495e;
+    background-color: none;
+    color: #34495e;
+    box-shadow: none;
+    margin: 8px 0;
+    transition: .5s ease;
+}
+
+select:hover {
+    background-color: #34495e;
+    color: white;
+}
 
 /* Posts Container */
 
@@ -98,14 +147,15 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 5px;
-    border: 2px solid #34495e;
+    font-size: 16px;
+    /* border: 2px solid #34495e; */
 }
 
 
 /* Text field input */
 
 input[type=text] {
-    width: 50%;
+    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
@@ -126,7 +176,7 @@ input[type=text] {
 .select-interval {
     width: 60px;
     height: 51px;
-    padding: 12px 12px;
+    margin: 0;
     margin-left: 5px;
     font-size: 20px;
     border: 2px solid #34495e;

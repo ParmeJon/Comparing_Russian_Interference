@@ -20,8 +20,8 @@ class SearchIdForm extends React.Component {
     return (
       <div className="search-id-form">
         <form onSubmit={this.handleSubmit}>
-          <input className="id-input" placeholder="Search by id" onChange={this.handleChange} value={this.state.searchId}/>
-          <button className="id-button">Search</button>
+          <input className="id-input theme-input" placeholder="Search by id" onChange={this.handleChange} value={this.state.searchId}/>
+          <button className="id-button theme-button">Search</button>
         </form>
       </div>
     );

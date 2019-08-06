@@ -90,9 +90,9 @@ class App extends React.Component {
         <div id="title">RUSSIAN INTERFERENCE DATA</div>
         <SearchIdForm handleIdSearch={this.handleIdSearch}/>
 
-        <div>
-          <form onSubmit={this.searchWithFilter}>
-            <div className="select">
+        <div >
+          <form className="filter-form-container" onSubmit={this.searchWithFilter}>
+            <div className="filter-item">
               <select value={this.state.property} name="property" onChange={this.handleChange} placeholder="Filter by property">
                 <option value="text">Text Content</option>
                 <option value="url">URL</option>
@@ -103,23 +103,23 @@ class App extends React.Component {
               </select>
             </div>
 
-            <input type="text" name="propertyFilter" placeholder="Search for..." onChange={this.handleChange}></input>
+            <input className="theme-input filter-input filter-item" type="text" name="propertyFilter" placeholder="Search for..." onChange={this.handleChange}></input>
            
-            <div className="select">
+            <div className="filter-item">
               <select value={this.state.order} name="order" onChange={this.handleChange}>
                 <option value="clicks">Clicks</option>
                 <option value="impressions">Impressions</option>
               </select>
             </div>
 
-            <div className="select">
+            <div className="filter-item">
               <select value={this.state.orderBy} name="orderBy" onChange={this.handleChange}>
                 <option value="desc">Desc</option>
                 <option value="asc">Asc</option>
               </select>
             </div>
 
-            <button>Search</button>
+            <button className="theme-button filter-item">Search</button>
           </form>
         </div>
 
