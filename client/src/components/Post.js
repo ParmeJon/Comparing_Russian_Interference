@@ -4,9 +4,9 @@ const Post = ({info}) => {
     return (
         <div className="posts">
             <div>{info.id}</div>
-            <div>IM{info.impressions}</div>
-            <div>CL{info.clicks} </div>
-            <div>{info.text}</div>
+            <div>{info.impressions}</div>
+            <div>{info.clicks} </div>
+            <div className="textcontent">{info.text}</div>
             <div>{new Date(info.created).toDateString()}</div>
         </div>
     )

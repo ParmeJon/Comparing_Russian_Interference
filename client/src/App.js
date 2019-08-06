@@ -123,25 +123,27 @@ class App extends React.Component {
           </form>
         </div>
 
-        <div className="select">
-          <select value={this.state.interval} name="interval" onChange={this.handleInterval}>
-            <option value="20">20</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-          </select>
-        </div>
-
         <div className="posts-container">
           <div className="post-labels posts">
             <div>ID</div>
             <div>Impressions</div>
             <div>Clicks</div>
             <div>Text Content</div>
-            <div>Date Created</div>
+            <div>Created</div>
           </div>
         { this.state.errors !== "" ? this.state.errors : posts }
         </div>
-        { posts.length > 1 && this.state.morePosts ? <button onClick={this.loadMore}> Load More </button> : <p>No More</p>}
+
+        <div className="bottom-bar">
+        { posts.length > 1 && this.state.morePosts ? <button className="load-more-btn" onClick={this.loadMore}> Load More </button> : <div className="no-more">No More</div>}
+          <div className="select">
+            <select className="select-interval" value={this.state.interval} name="interval" onChange={this.handleInterval}>
+              <option value="20">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+          </div>
+        </div>
       
         <ScrollButton scrollStepInPx="100" delayInMs="5"/>
       </div>

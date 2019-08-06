@@ -7,8 +7,15 @@
 /* TABLE OF CONTENTS */
 /* Title Header */
 /* Search ID Form */
+/* FILTER FORM */
 /* Posts Container */
+/* Posts */
+/* Post Labels */
 /* Text Field Input */
+/* Bottom Bar */
+/* select interval */
+/* Load More button */
+/* No more Div */
 /* Scroll Button */
 
 /* Title Header */
@@ -16,9 +23,9 @@
 #title {
     margin: 20px, 10px, 0px;
     text-align: center;
-    font-size: 25px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-size: 40px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     background-color: #1abc9c;
     color: white;
 }
@@ -36,6 +43,7 @@
     width: 200px;
     padding: 12px 20px;
     margin: 8px 0;
+    border: 2px solid #34495e;
     box-sizing: border-box;
     font-size: 14px;
 }
@@ -43,11 +51,20 @@
 .id-button {
     padding: 12px 20px;
     margin: 8px 0;
-    background-color: #1abc9c;
+    border: 2px solid #1abc9c;
     font-size: 15px;
     border-radius: 2px;
+    color: #1abc9c;
+    margin-left: 5px;
+    transition: .5s ease;
+}
+
+.id-button:hover {
+    background-color: #1abc9c;
     color: white;
 }
+
+/* FILTER FORM */
 
 /* Posts Container */
 
@@ -58,15 +75,32 @@
     grid-row-gap: 10px;
 }
 
-.post-labels {
-    font-weight: bold;
-}
 
 /* Posts */
 .posts {
     display: grid; 
-    grid-template-columns: 50px 100px 100px 1fr 100px;
+    grid-template-columns: 50px 80px 80px 1fr 130px;
+    grid-column-gap: 8px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ecf0f1;
+    text-align: center;
+    
 }
+
+.textcontent {
+    text-align: left;
+}
+
+/* Post Labels */
+.post-labels {
+    font-weight: bold;
+    display: grid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 5px;
+    border: 2px solid #34495e;
+}
+
 
 /* Text field input */
 
@@ -77,6 +111,65 @@ input[type=text] {
     box-sizing: border-box;
 }
 
+/* BOTTOM BAR */
+
+.bottom-bar {
+    width: 80vw;
+    display: flex;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* select interval */
+
+.select-interval {
+    width: 60px;
+    height: 51px;
+    padding: 12px 12px;
+    margin-left: 5px;
+    font-size: 20px;
+    border: 2px solid #34495e;
+    color: #34495e;
+}
+
+/* Load More Button */
+.load-more-btn {
+    width: 75vw;
+    padding: 12px 20px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: 2px solid #1abc9c;
+    color: #1abc9c;
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
+    transition: .5s ease;
+}
+
+.load-more-btn:hover {
+    background-color: #1abc9c;
+    color: white;
+
+}
+
+.load-more-btn:focus {
+    outline: none;
+}
+
+
+/* No More DIV*/
+
+.no-more {
+    width: 80vw;
+    color: #1abc9c;
+    text-align: center;
+    font-size: 15px;
+    padding: 12px 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 /* Scroll Button */
 .scroll {
@@ -89,7 +182,7 @@ input[type=text] {
   right: 10px;
   border-radius: 5px;
   border: none;
-  
+  transition: .5s ease;
 }
 .scroll:hover {
   opacity: 1;
