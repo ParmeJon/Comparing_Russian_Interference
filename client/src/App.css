@@ -157,7 +157,7 @@ select:hover {
 /* Posts */
 .posts {
     display: grid; 
-    grid-template-columns: 10px 50px 80px 80px 2fr 130px;
+    grid-template-columns: 10px 50px 80px 80px 1fr 130px;
     grid-column-gap: 8px;
     padding-bottom: 15px;
     border-bottom: 2px solid #ecf0f1;
