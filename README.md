@@ -1,9 +1,10 @@
 # Comparing Russian Interference Project
 
 A simple analysis tool on Posts in the db.json that are flagged as Russian Interference. 
-Search, examine and compare to your hearts content.
 
-![Alt text](layout.png)
+Search, examine and compare to your heart's content.
+
+![Alt text](layout.png "UI Design")
 
 ## Install 
 ```
