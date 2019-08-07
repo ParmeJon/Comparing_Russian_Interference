@@ -3,6 +3,8 @@
 A simple analysis tool on Posts in the db.json that are flagged as Russian Interference. 
 Search, examine and compare to your hearts content.
 
+![Alt text](layout.png)
+
 ## Install 
 ```
 npm run total-install
