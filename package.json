@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "total-install": "npm install & npm install --prefix client",
     "client": "npm start --prefix client",
-    "server": "json-server --watch db.json",
+    "server": "node server.js",
     "start": "npm run server & npm run client"
   },
   "repository": {

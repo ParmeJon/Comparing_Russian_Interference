@@ -8,6 +8,7 @@ class App extends React.Component {
 
   state = {
     posts: [],
+    watchedPosts: [],
     startNum: 0,
     endNum: 50,
     interval: 50,
@@ -53,6 +54,8 @@ class App extends React.Component {
     let URL
     if (this.state.property === "impressions" || this.state.property === "clicks") {
       URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}=${this.state.propertyFilter}`
+    } else if (this.state.property === "ended" && this.state.propertyFilter === "null") {
+      URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&ended_is_null`
     } else {
       URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`
     }
@@ -62,7 +65,15 @@ class App extends React.Component {
   }
 
   loadUser = () => {
-      fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
+        let URL
+        if (this.state.property === "impressions" || this.state.property === "clicks") {
+          URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}=${this.state.propertyFilter}`
+        } else if (this.state.property === "ended" && this.state.propertyFilter === "null") {
+          URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&ended_is_null`
+        }else {
+          URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`
+        }
+      fetch(URL)
       .then(res => res.json())
       .then(json => {
         if (json.length < 1) {
@@ -85,7 +96,9 @@ class App extends React.Component {
     let URL
     if (this.state.property === "impressions" || this.state.property === "clicks") {
       URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}=${this.state.propertyFilter}`
-    } else {
+    } else if (this.state.property === "ended" && this.state.propertyFilter === "null") {
+      URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&ended_is_null`
+    }else {
       URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`
     }
     fetch(URL)
@@ -93,16 +106,35 @@ class App extends React.Component {
       .then(json => this.setState({ posts: json }));
   }
 
+  addToWatchList = (postObj) => {
+    if (this.state.watchedPosts.find((post) => post.id === postObj.id)) {
+      return alert('Already Added This Post.')
+    }
+    this.setState({watchedPosts: [...this.state.watchedPosts, postObj]})
+  }
+
+  removeFromWatchList = (id) => {
+    const newWatchedPosts = this.state.watchedPosts.filter((post) => post.id !== id) 
+    this.setState({watchedPosts: [...newWatchedPosts]})
+  }
+
   render() {
 
-    const posts = this.state.posts.map(post => <Post key={post.id} info={post}/>)
+    const posts = this.state.posts.map(post => <Post key={post.id} info={post} addToWatchList={this.addToWatchList}/>)
+    const watchedPosts = this.state.watchedPosts.map(post => <Post key={post.id} info={post} remove={true} removeFromWatchList={this.removeFromWatchList}/>)
 
     return (
       <div className="App">
         <div id="title">RUSSIAN INTERFERENCE DATA</div>
         <SearchIdForm handleIdSearch={this.handleIdSearch}/>
 
-        <div >
+        <div>
+          <div className="filter-form-labels">
+            <div>Filter By</div>
+            <div></div>
+            <div>Order By</div>
+          </div>
+
           <form className="filter-form-container" onSubmit={this.searchWithFilter}>
             <div className="filter-item">
               <select value={this.state.property} name="property" onChange={this.handleChange} placeholder="Filter by property">
@@ -137,8 +169,15 @@ class App extends React.Component {
           </form>
         </div>
 
+
+        <div className="watch-list">
+          <div className="watch-list-title">Watch List</div>
+          {watchedPosts.length >= 1 ? watchedPosts : <div> Currently no watched posts </div>}
+        </div>
+
         <div className="posts-container">
           <div className="post-labels posts">
+            <div></div>
             <div>ID</div>
             <div>Impressions</div>
             <div>Clicks</div>
@@ -149,7 +188,7 @@ class App extends React.Component {
         </div>
 
         <div className="bottom-bar">
-        { posts.length > 1 && this.state.morePosts ? <button className="load-more-btn" onClick={this.loadMore}> Load More </button> : <div className="no-more">No More</div>}
+        { posts.length >= 1 && this.state.morePosts ? <button className="load-more-btn" onClick={this.loadMore}> Load More </button> : <div className="no-more">No More</div>}
           <div className="select">
             <select className="select-interval" value={this.state.interval} name="interval" onChange={this.handleInterval}>
               <option value="20">20</option>

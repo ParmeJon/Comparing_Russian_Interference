@@ -8,6 +8,7 @@
 /* Title Header */
 /* Search ID Form */
 /* FILTER FORM */
+/* Watched Posts */
 /* Posts Container */
 /* Posts */
 /* Post Labels */
@@ -40,7 +41,7 @@
 
 .search-id-form {
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     text-align: center;
 }
 
@@ -77,6 +78,14 @@
 }
 
 /* FILTER FORM */
+
+.filter-form-labels {
+    display: grid;
+    width: 80vw;
+    grid-template-columns: 130px 2fr 115px 65px 91.8px;
+    grid-column-gap: 5px;
+    margin: auto;
+}
 
 .filter-form-container {
     display: grid;
@@ -115,6 +124,26 @@ select:hover {
     color: white;
 }
 
+/* Watched Posts */
+
+.watch-list {
+    width: 80vw;
+    color: #1abc9c;
+    text-align: center;
+    font-size: 15px;
+    padding: 12px 20px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.watch-list-title {
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
 /* Posts Container */
 
 .posts-container {
@@ -128,12 +157,21 @@ select:hover {
 /* Posts */
 .posts {
     display: grid; 
-    grid-template-columns: 50px 80px 80px 1fr 130px;
+    grid-template-columns: 10px 50px 80px 80px 2fr 130px;
     grid-column-gap: 8px;
     padding-bottom: 15px;
     border-bottom: 2px solid #ecf0f1;
     text-align: center;
     
+}
+
+.add-btn {
+    margin-top: 2px;
+    opacity: .5;
+}
+
+.add-btn:hover {
+    opacity: 1;
 }
 
 .textcontent {
