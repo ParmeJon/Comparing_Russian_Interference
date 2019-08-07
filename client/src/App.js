@@ -50,7 +50,13 @@ class App extends React.Component {
   searchWithFilter = async (e) => {
     e.preventDefault()
     await this.setState({startNum: 0, endNum: this.state.interval, morePosts: true})
-     fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
+    let URL
+    if (this.state.property === "impressions" || this.state.property === "clicks") {
+      URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}=${this.state.propertyFilter}`
+    } else {
+      URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`
+    }
+     fetch(URL)
       .then(res => res.json())
       .then(json => this.setState({ posts: json }));
   }
@@ -76,7 +82,13 @@ class App extends React.Component {
 
   handleInterval = async (e) => {
     await this.setState({ interval: e.target.value, endNum: e.target.value, startNum: 0})
-    fetch(`http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`)
+    let URL
+    if (this.state.property === "impressions" || this.state.property === "clicks") {
+      URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}=${this.state.propertyFilter}`
+    } else {
+      URL = `http://localhost:3000/posts?_sort=${this.state.order}&_order=${this.state.orderBy}&_start=${this.state.startNum}&_end=${this.state.endNum}&${this.state.property}_like=${this.state.propertyFilter}`
+    }
+    fetch(URL)
       .then(res => res.json())
       .then(json => this.setState({ posts: json }));
   }
@@ -97,6 +109,8 @@ class App extends React.Component {
                 <option value="text">Text Content</option>
                 <option value="url">URL</option>
                 <option value="pdf">PDF</option>
+                <option value="impressions">Impressions</option>
+                <option value="clicks">Clicks</option>
                 <option value="image">Image Number</option>
                 <option value="created">Created At</option>
                 <option value="ended">Ended On</option>
