@@ -1,7 +1,7 @@
 # Comparing Russian Interference Project
 
 A simple analysis tool on Posts in the db.json that are flagged as Russian Interference. 
-Search, examins and compare to your hearts content.
+Search, examine and compare to your hearts content.
 
 ## Install 
 ```
